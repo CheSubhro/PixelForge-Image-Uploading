@@ -14,8 +14,9 @@ export interface IImage {
   mimeType: string;
 
   original: IImageVersion;
-  optimized: IImageVersion;
   thumbnail: IImageVersion;
+  optimized: IImageVersion;
+  detail: IImageVersion;
 
   createdAt: Date;
   updatedAt: Date;
@@ -27,28 +28,35 @@ const ImageVersionSchema = new Schema<IImageVersion>(
       type: String,
       required: true,
     },
+
     secureUrl: {
       type: String,
       required: true,
     },
+
     width: {
       type: Number,
       required: true,
     },
+
     height: {
       type: Number,
       required: true,
     },
+
     bytes: {
       type: Number,
       required: true,
     },
+
     format: {
       type: String,
       required: true,
     },
   },
-  { _id: false }
+  {
+    _id: false,
+  }
 );
 
 const ImageSchema = new Schema<IImage>(
@@ -69,16 +77,22 @@ const ImageSchema = new Schema<IImage>(
       required: true,
     },
 
+    thumbnail: {
+      type: ImageVersionSchema,
+      required: true,
+    },
+
     optimized: {
       type: ImageVersionSchema,
       required: true,
     },
 
-    thumbnail: {
+    detail: {
       type: ImageVersionSchema,
       required: true,
     },
   },
+
   {
     timestamps: true,
   }
