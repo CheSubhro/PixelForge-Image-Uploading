@@ -15,7 +15,6 @@ import { validateImageFile } from "@/lib/validations/image";
 
 import Image from "@/models/Image";
 
-export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
