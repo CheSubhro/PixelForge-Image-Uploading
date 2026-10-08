@@ -28,7 +28,9 @@ export async function uploadBufferToCloudinary(
       },
       (error, result) => {
         if (error || !result) {
-          reject(error || new Error("Cloudinary upload failed"));
+          reject(
+            error || new Error("Cloudinary upload failed")
+          );
           return;
         }
 
@@ -44,6 +46,14 @@ export async function uploadBufferToCloudinary(
     );
 
     uploadStream.end(buffer);
+  });
+}
+
+export async function deleteFromCloudinary(
+  publicId: string
+): Promise<void> {
+  await cloudinary.uploader.destroy(publicId, {
+    resource_type: "image",
   });
 }
 
